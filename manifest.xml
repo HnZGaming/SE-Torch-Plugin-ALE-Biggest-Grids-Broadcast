@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>ALE Grid Broadcaster</Name>
-  <Guid>b3e6b485-3196-457e-9f12-46a6445ff887</Guid>
+  <Guid>eb5e182f-7da8-466c-8aeb-41bc227dc911</Guid>
   <Repository>None</Repository>
   <Version>v1.0.6.2</Version>
 </PluginManifest>

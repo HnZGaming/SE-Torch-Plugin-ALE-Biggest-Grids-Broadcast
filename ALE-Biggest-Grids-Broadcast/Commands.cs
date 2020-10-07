@@ -22,6 +22,7 @@ namespace ALE_Biggest_Grids_Broadcast {
     public class Commands : CommandModule {
 
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        static readonly GpsSendClient _gpsSendClient = new GpsSendClient();
 
         public GridsBroadcastPlugin Plugin => (GridsBroadcastPlugin) Context.Plugin;
 
@@ -72,7 +73,7 @@ namespace ALE_Biggest_Grids_Broadcast {
 
         private void SendGridsInternal(bool biggest, bool furthest, bool abandoned, bool biggestBlocks) {
 
-            Plugin.RemoveGpsFromAllPlayers();
+            //Plugin.RemoveGpsFromAllPlayers();
 
             HashSet<MyGps> gpsSet = new HashSet<MyGps>();
             long seconds = GetTimeMs();
@@ -161,17 +162,28 @@ namespace ALE_Biggest_Grids_Broadcast {
             bool playSound = config.PlayGpsSound;
 
             foreach (MyPlayer player in MySession.Static.Players.GetOnlinePlayers()) {
+                Log.Trace($"Sending biggest grid GPS to player '{player.DisplayName}'");
                 foreach (MyGps gps in gpsSet) {
 
                     MyGps gpsRef = gps;
 
                     long entityId = 0L;
                     if (followGrids)
-                        entityId = gps.EntityId;
+                    {
+                        _gpsSendClient.AddOrModifyGps(player.Identity.IdentityId, ref gpsRef, playSound);
+                        continue;
+                    }
 
                     gpsCollection.SendAddGps(player.Identity.IdentityId, ref gpsRef, entityId, playSound);
                 }
             }
+        }
+
+        [Command("restorebiggps", "Show GPS of biggest grids again")]
+        [Permission(MyPromoteLevel.None)]
+        public void ForgetGpsSent() {
+            long player = Context.Player.IdentityId;
+            _gpsSendClient.ForgetGpsSentToPlayer(player);
         }
 
         [Command("removebiggps", "obsolete use !removegps instead")]
