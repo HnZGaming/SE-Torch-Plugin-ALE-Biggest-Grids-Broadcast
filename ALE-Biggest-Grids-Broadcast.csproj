@@ -143,6 +143,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ALE-Biggest-Grids-Broadcast\GpsSendClient.cs" />
     <Compile Include="ALE-Biggest-Grids-Broadcast\GridDetection\AbstractGridDetectionStrategy.cs" />
     <Compile Include="ALE-Biggest-Grids-Broadcast\GridDetection\AbandonedGridDetectionStrategy.cs" />
     <Compile Include="ALE-Biggest-Grids-Broadcast\GridDetection\BiggestGridDetectionBlocksStrategy.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="ALE-Biggest-Grids-Broadcast\Control.xaml.cs">
       <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ALE-Biggest-Grids-Broadcast\SetDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ALE-Biggest-Grids-Broadcast\Control.xaml">
